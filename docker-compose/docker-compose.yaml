@@ -1,0 +1,18 @@
+version: "3.0"
+services:
+  index:
+    image: index-service:v0.2
+    environment:
+      - TIME_SERVICE=localhost:5001
+      - FIB_SERVICE=localhost:5002
+    ports:
+      - 5000:5000
+
+  time:
+    image: time-service:v0.4
+    network_mode: service:index
+
+  fib:
+    image: fib-service:v0.4
+    network_mode: service:index
+
